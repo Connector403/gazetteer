@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\libs",
+    "\\libs\\css",
+    "\\libs\\js",
+    "\\libs\\vendors",
+    "\\libs\\vendors\\leaflet",
+    "\\libs\\vendors\\sidebar-10",
+    "\\libs\\vendors\\sidebar-10\\images",
+    "\\libs\\vendors\\sidebar-10\\js"
+  ],
+  "SelectedNode": "\\countryBorders.geo.json",
+  "PreviewInSolutionExplorer": false
+}
