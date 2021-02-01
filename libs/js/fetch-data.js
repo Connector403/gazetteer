@@ -1,4 +1,10 @@
 
+function resetMap() {
+    let container = L.DomUtil.get('mapid-001');
+    if (container != null) {
+        container._leaflet_id = null;
+    }
+}
 
 function restCountry(countryName) {
     return $.ajax({
@@ -119,4 +125,4 @@ function geoCountryInfo(countryCode) {
     })
 }
 
-export { restCountry, reverseOpenCage, openWeather, returnName, covidNews, countryBordergeo, geocountryCode, geoCountryInfo};
+export { resetMap, restCountry, reverseOpenCage, openWeather, returnName, covidNews, countryBordergeo, geocountryCode, geoCountryInfo};

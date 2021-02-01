@@ -1,4 +1,6 @@
 <?php 
+
+	// this api return contry code for a lat/lng
 	$ch = curl_init();
 	$apikey = "ab082527cf014e18a9995ef318a15ecd";
 	$url = "https://api.opencagedata.com/geocode/v1/json?key=" .$apikey . "&q=" .$_REQUEST['lat']. "%2C" . $_REQUEST['lng']. "pretty=1";

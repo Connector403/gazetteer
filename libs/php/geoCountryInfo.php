@@ -1,4 +1,5 @@
 <?php 
+	// return country information: Capital, Population, Area in square km, Bounding Box of mainland (excluding offshore islands)
 	$url = 'http://api.geonames.org/countryInfoJSON?formatted=true&lang=&country=' . $_REQUEST['countryCode'] . '&username=sherazzi403&style=full';
 
 
@@ -18,7 +19,7 @@
 	$output['status']['code'] = "200";
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "Success";
-	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+	
 	$output['data'] = $decode['geonames'];
 
 	header('Content-Type: application/json; charset=UTF-8');
