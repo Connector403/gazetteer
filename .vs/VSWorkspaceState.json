@@ -6,11 +6,8 @@
     "\\libs\\js",
     "\\libs\\php",
     "\\libs\\vendors",
-    "\\libs\\vendors\\leaflet",
-    "\\libs\\vendors\\sidebar-10",
-    "\\libs\\vendors\\sidebar-10\\images",
-    "\\libs\\vendors\\sidebar-10\\js"
+    "\\libs\\vendors\\leaflet"
   ],
-  "SelectedNode": "\\libs\\php\\forwardOpenCage.php",
+  "SelectedNode": "\\libs\\js\\script.js",
   "PreviewInSolutionExplorer": false
 }

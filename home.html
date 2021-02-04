@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
-
+    <title>Gazetteer</title>
+    <link rel="stylesheet" href="libs/vendors/leaflet/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
@@ -23,9 +26,9 @@
 
 <body>
 
-    <div class="wrapper">
+    <div class="d-flex wrapper">
         <!-- Sidebar  -->
-        <nav id="sidebar">
+        <nav id="sidebar" class="sidebar-wraooer">
             <div class="sidebar-header">
                 <h3>Gazetteer</h3>
             </div>
@@ -125,6 +128,7 @@
             </ul>
 
         </nav>
+
 
         <!-- Page Content  -->
         <div id="content">
@@ -341,11 +345,12 @@
             </nav>
 
 
-            <div id="mapid-001"></div>
+
 
         </div>
-    </div>
 
+    <div id="mapid-001"></div>
+    </div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://ajax.googleapis.com/ajax/libs/hammerjs/2.0.8/hammer.min.js"></script>
     <!-- Popper.JS -->
@@ -356,7 +361,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
 
-
+   
     <script type="application/javascript" src="libs/vendors/leaflet/leaflet.js"></script>
     <script type="application/application/json" src="countryBorders.geo.json"></script>
     <script type="application/application/json" src="countries.geo.json"></script>

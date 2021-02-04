@@ -5,38 +5,22 @@ $(document).ready(function () {
 
     // Access TOken mapbox leaflet api : pk.eyJ1Ijoic2hlcmF6emk0MDMiLCJhIjoiY2tqd3hxMHRzMGo5eTJvbWxlZ3YxaWduciJ9.PeHvYuh7IIjyfK6L38ApaA
 
-    let lat, lng, countryISO, capitalCity, iconMap, satallite, darktheme, initalMap;
+    let lat, lng, countryISO, capitalCity, iconMap, satellite, darktheme, initalMap;
     
-    initalMap = L.map('mapid-001').setView([51.505, -0.09], 3);
+    var mymap = L.map('mapid-001').setView([51.505, -0.09], 13);
 
-    satallite = L.tileLayer('https://api.mapbox.com/styles/v1/jed-boyle/cke2ojbj013x519oqxxyw8ni9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamVkLWJveWxlIiwiYSI6ImNrZHl2b2tueTEyanUyem94NmFmbnRteHMifQ._t0IfY0ZBWG9jfS60ELz3w', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+
+    // setting up the tile layers
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox/streets-v11',
         tileSize: 512,
         zoomOffset: -1,
         accessToken: 'pk.eyJ1Ijoic2hlcmF6emk0MDMiLCJhIjoiY2tqd3hxMHRzMGo5eTJvbWxlZ3YxaWduciJ9.PeHvYuh7IIjyfK6L38ApaA'
-    }).addTo(initalMap);
+    }).addTo(mymap);
 
-    darktheme = L.tileLayer('https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}', {
-        attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.',
-        minZoom: 1,
-        maxZoom: 8,
-        format: 'jpg',
-        time: '',
-        tilematrixset: 'GoogleMapsCompatible_Level'
-    });
-
-
-    iconMap = L.icon({
-        iconUrl: 'libs/img/pin-map-orange.png',
-        iconSize: [70, 70],
-        iconAnchor: [24, 75],
-        popupAnchor: [-3, -76],
-        shadowSize: [68, 95],
-        shadowAnchor: [22, 94]
-    });
-    
     //**********************************************************************************************************************
 
     navigator.geolocation.getCurrentPosition(success);
@@ -51,6 +35,30 @@ $(document).ready(function () {
             //console.log(countryISO);
             //console.log(geoCountryInfo(countryISO));
             return geoCountryInfo(countryISO);
+            countryBordergeo(countryISO).then(result => {
+                let country = iso2;
+                let Obj = result[1];
+                let jsonObj = Obj['features'];
+
+                for (let i = 0; i < jsonObj.length; i++) {
+
+                    if (country === jsonObj[i]['id']) {
+
+                        let geoData = jsonObj[i];
+
+                        L.geoJSON(geoData, {
+
+                            style: function (feature) {
+                                return {
+                                    "color": "blue",
+                                    "weight": 5,
+                                    "opacity": 0
+                                }
+                            }
+                        }).addTo(mymap);
+                    }
+                }
+            })
         }).then(function (data1) {
             //console.log(data1);
             $('#countryName').html(data1['data'][0]['countryName']);
