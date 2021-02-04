@@ -1,4 +1,4 @@
-import { resetMap, restCountry, reverseOpenCage, openWeather, returnName, covidNews, countryBordergeo, geocountryCode, geoCountryInfo }from './fetch-data.js';
+import { getData, resetMap, restCountry, reverseOpenCage, openWeather, returnName, covidNews, countryBordergeo, geocountryCode, geoCountryInfo }from './fetch-data.js';
 
 
 $(document).ready(function () {
@@ -6,7 +6,7 @@ $(document).ready(function () {
     // Access TOken mapbox leaflet api : pk.eyJ1Ijoic2hlcmF6emk0MDMiLCJhIjoiY2tqd3hxMHRzMGo5eTJvbWxlZ3YxaWduciJ9.PeHvYuh7IIjyfK6L38ApaA
 
     let lat, lng, countryISO, capitalCity, iconMap, satallite, darktheme, initalMap;
-    /*
+    
     initalMap = L.map('mapid-001').setView([51.505, -0.09], 3);
 
     satallite = L.tileLayer('https://api.mapbox.com/styles/v1/jed-boyle/cke2ojbj013x519oqxxyw8ni9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiamVkLWJveWxlIiwiYSI6ImNrZHl2b2tueTEyanUyem94NmFmbnRteHMifQ._t0IfY0ZBWG9jfS60ELz3w', {
@@ -36,7 +36,7 @@ $(document).ready(function () {
         shadowSize: [68, 95],
         shadowAnchor: [22, 94]
     });
-    */
+    
     //**********************************************************************************************************************
 
     navigator.geolocation.getCurrentPosition(success);
@@ -61,40 +61,93 @@ $(document).ready(function () {
             $('#flag').attr('src', "https://www.countryflags.io/" + data1['data'][0]['countryCode'] + "/shiny/64.png");
 
             capitalCity = data1['data'][0]['capital'];
+
+
+            covidNews(data1['data'][0]['countryName']).then(function (covidResult) {
+                $('#country').html(covidResult['parameters']['country']);
+                $('#totalPop').html(covidResult['response'][0]['population']);
+                $('#activeCase').html(covidResult['response'][0]['cases']['active']);
+                $('#criticalCases').html(covidResult['response'][0]['cases']['critical']);
+                $('#newCases').html(covidResult['response'][0]['cases']['new']);
+                $('#recovered').html(covidResult['response'][0]['cases']['recovered']);
+                $('#totalCases').html(covidResult['response'][0]['cases']['total']);
+                $('#totalDeaths').html(covidResult['response'][0]['deaths']['total']);
+                $('#newDeaths').html(covidResult['response'][0]['deaths']['new']);
+
+                $('#date').html(covidResult['response'][0]['day']);
+                
+            });
             //console.log(capitalCity);
             return openWeather(capitalCity);
 
         }).then(function (result) {
-            console.log(result );
+            //console.log(result );
             //openWeather for capital city 
-            $('#feelsLike').html(Math.round(result['main']['feels_like']/100));
-         
+            $('#feelsLike').html(Math.round(result['main']['feels_like'] / 100));
+
             $('#weather').html(result['weather'][0]['description']);
             $('#weatherWind').html(result['wind']['speed']);
             $('#weathertemp').html(Math.floor(result['main']['temp'] / 100));
             $('#weatherHumidity').html(result['main']['humidity']);
-        })
+        });
      
     }; // navigator succes function
 
   
     // **********************************************************************************************************************
 
-    $('#selCountry').change(function () {
-        let countryISO = $('#selCountry').val();
+    $('#selCountry').click(function () {
+        getData()
+        let countryName = $('#selCountry').val();
         //console.log(countryISO);
         console.log(covidNews(countryISO));
-       covidNews(countryISO).then(function (covidArr) {
-           //console.log(covidArr['response'][0]['population'] + " HEYEYEYEY");
+
+        restCountry(countryName).then(function (data1) {
+            //console.log(data1[0]['alpha2Code']);
+
+            let countryISO2 = data1[0]['alpha2Code'];
+            //console.log(countryISO2);
+            return geoCountryInfo(countryISO2);
+
+
+
+
+
+        }).then(function (data2) {
+            //console.log(data2['data'][0]['capital']);
+            $('#Population').html(data2['data'][0]['population']);
+            $('#countryName').html(data2['data'][0]['countryName']);
+            $('#capitalCity').html(data2['data'][0]['capital']);
+            $('#continentName').html(data2['data'][0]['continentName']);
+            $('#flag').attr('src', "https://www.countryflags.io/" + data2['data'][0]['countryCode'] + "/shiny/64.png");
+            return openWeather(data2['data'][0]['capital']);
+        }).then(function (weatherResult) {
+            //console.log(weatherResult);
+            $('#feelsLike').html(Math.round(weatherResult['main']['feels_like'] / 100));
+
+            $('#weather').html(weatherResult['weather'][0]['description']);
+            $('#weatherWind').html(weatherResult['wind']['speed']);
+            $('#weathertemp').html(Math.floor(weatherResult['main']['temp'] / 100));
+            $('#weatherHumidity').html(weatherResult['main']['humidity']);
+
+        })
+
+
+        covidNews(countryName).then(function (covidArr) {
+            //console.log(covidArr['response'][0]['population'] + " HEYEYEYEY");
+            //console.log(covidArr);
            $('#country').html(covidArr['parameters']['country']);
            $('#totalPop').html(covidArr['response'][0]['population']);
-           $('#activeCase').html(covidArr['response'][0]['cases']['active']);
-           $('#permillionaffected').html(covidArr['response'][0]['cases']['recovered']);
-           $('#caseRecovered').html(covidArr['response'][0]['cases']['1M_pop']);
-           $('#caseNew').html(covidArr['response'][0]['deaths']['new']);
-           $('#PEM').html(covidArr['response'][0]['deaths']['1M_pop']);
-           $('#deathTotal').html(covidArr['response'][0]['deaths']['total']);
-           $('#day').html(covidArr['response'][0]['time']);
+            $('#activeCase').html(covidArr['response'][0]['cases']['active']);
+            $('#criticalCases').html(covidArr['response'][0]['cases']['critical']);
+            $('#newCases').html(covidArr['response'][0]['cases']['new']);
+            $('#recovered').html(covidArr['response'][0]['cases']['recovered']);
+           $('#totalCases').html(covidArr['response'][0]['cases']['total']);
+            $('#totalDeaths').html(covidArr['response'][0]['deaths']['total']);
+            $('#newDeaths').html(covidArr['response'][0]['deaths']['new']);
+        
+            $('#date').html(covidArr['response'][0]['day']);
+
 
         });
     });

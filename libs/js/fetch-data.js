@@ -125,4 +125,18 @@ function geoCountryInfo(countryCode) {
     })
 }
 
-export { resetMap, restCountry, reverseOpenCage, openWeather, returnName, covidNews, countryBordergeo, geocountryCode, geoCountryInfo};
+
+function getData() {
+    return $.ajax({
+        url: "libs/php/getAll.php",
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data)
+            return data;
+        }
+    });
+};
+
+
+export { getData, resetMap, restCountry, reverseOpenCage, openWeather, returnName, covidNews, countryBordergeo, geocountryCode, geoCountryInfo };
