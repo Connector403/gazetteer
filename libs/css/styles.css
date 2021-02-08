@@ -160,6 +160,7 @@ a.article:hover {
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 2
 }
 
     #content.active {
@@ -194,10 +195,10 @@ a.article:hover {
 
 
 #mapid-001 {
-    height: 100%;
-    width: auto;
+    height: 50%;
+    width: 50%;
     margin-top: -80px;
-    z-index: 1;
+    z-index: -1;
     width: 100%;
     flex: auto;
 }
@@ -265,7 +266,7 @@ a.article:hover {
 #mapid-001,
 .row-fluid {
     height: 100%;
-    z-index: 1;
+    z-index: 2;
 }
 
 #map-wrapper {

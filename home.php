@@ -6,13 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Gazetteer</title>
+    <title>Gazetteer worldwide</title>
+    !-- Description -->
+    <meta name="description" content="AJAX/PHP/CURL/JSON golocation app">
+
+
+    <!-- Leaflet -->
     <link rel="stylesheet" href="libs/vendors/leaflet/leaflet.css">
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-            crossorigin=""></script>
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="libs/vendors/bootstrap-4/css/bootstrap.min.css" rel="stylesheet">
+    
+
+    
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="libs/css/styles.css">
     <!-- Scrollbar Custom CSS -->
@@ -133,7 +141,7 @@
         <!-- Page Content  -->
         <div id="content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav id="content-page" class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
@@ -344,19 +352,21 @@
                 </div>
             </nav>
 
-
+            <div id="mapid-001"></div>
 
 
         </div>
+       
 
-    <div id="mapid-001"></div>
+
     </div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://ajax.googleapis.com/ajax/libs/hammerjs/2.0.8/hammer.min.js"></script>
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="libs/vendors/bootstrap-4/js/bootstrap.min.js"></script>
+  
     <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
